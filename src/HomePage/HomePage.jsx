@@ -86,8 +86,13 @@ class HomePage extends Component {
                 credentials="null"
                 url="http://192.168.15.57:9200"
                 analytics={true}
-                searchStateHeader
-        >
+                searchStateHeader>
+                <div>
+                        <h1>Hi {user.firstName}!</h1>
+                        <p>
+                        <Link to="/login">Logout</Link>
+                        </p>
+                </div>
                 <Row gutter={16} style={{ padding: 20 }}>
                         <Col span={12}>
                                 <Card>
