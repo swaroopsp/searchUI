@@ -22,6 +22,23 @@ import {
 } from 'antd';
 // import 'antd/dist/antd.css';
 
+function fetchURL(url) {
+    console.log("asdfsdfsd" + url)
+    return fetch('http://192.168.15.57:5000/files?pathToFile='+url, {
+      method: "GET"
+    })
+    .then((resp) => {
+      return resp.text();
+    }) 
+    .then((data) => {
+        console.log("11111111111111" + data)   
+        return data;              
+    })
+    .catch((error) => {
+      console.log(error, "catch the hoop")
+    })
+  }
+
 function getNestedValue(obj, path) {
         const keys = path.split('.');
         const currentObject = obj;
@@ -53,8 +70,10 @@ function renderItem(res, triggerClickAnalytics) {
                                 <p style={{ fontSize: '1em' }} dangerouslySetInnerHTML={{__html: description || 'Choose a valid Description Field'}}/>
                         </Col>
                         <div style={{padding:'20px'}}>
-                                {url ? <Button shape="circle" icon="link" style={{ marginRight: '5px' }} onClick={() => window.open(url, '_blank')} />
-: null}
+                                {url ? <Button shape="circle" icon="link" style={{ marginRight: '5px' }} onClick={() => {
+                                            fetchURL(url).then(fullPath=> window.open(fullPath))
+                                        }
+                                    } />: null}
                         </div>
                 </Row>
         );
