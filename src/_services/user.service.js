@@ -8,7 +8,7 @@ export const userService = {
 
 function login(username, password) {
 
-    return fetch('http://localhost:3001/users/authenticate',
+    return fetch('http://localhost:3000/fakeToken',
     {
         method: 'post',
         crossDomain:true,
@@ -17,13 +17,11 @@ function login(username, password) {
     })
     .then(response => response.json())
     .then(responseJson => {
-        console.log(" --------------" + responseJson);
-        // user.authdata = window.btoa(username + ':' + password);
-        localStorage.setItem('user', JSON.stringify(responseJson));
+        localStorage.setItem('token', responseJson.token);
     });
 }
 
 function logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('user');
+    localStorage.removeItem('token');
 }

@@ -22,6 +22,25 @@ import {
 } from 'antd';
 // import 'antd/dist/antd.css';
 
+function fetchUsers(token) {
+  return fetch('http://localhost:3000/verify', {
+      method: "POST",
+      crossDomain:true,
+      headers:{'Content-Type': 'application/json'},
+      body: JSON.stringify({ token })
+  })
+  .then((resp) => {
+      console.log(resp.status)
+      if(resp.status != 200){
+        throw error;
+      }
+      return resp.json();
+  })
+  .then((user) => {
+    return user;              
+})
+}
+
 function fetchURL(url) {
     console.log("asdfsdfsd" + url)
     return fetch('http://192.168.15.57:5000/files?pathToFile='+url, {
@@ -87,18 +106,25 @@ class HomePage extends Component {
         super(props);
 
         this.state = {
-                user: {},
-                users: []
+          user: {}
         };
     }
     componentDidMount() {
+      fetchUsers(localStorage.getItem('token'))
+      .then(user=> 
+        
         this.setState({ 
-            user: JSON.parse(localStorage.getItem('user')),
-            users: { loading: true }
-        });
+          user: user
+          
+      }))
+      .catch((error) => {
+        console.log(error, "There is some issue")
+        this.props.history.push('/login')
+      })
+        
     }
   render() {
-    const { user, users } = this.state;
+    const { user } = this.state;
     return (
         <ReactiveBase
                 app="fcaindex"
@@ -107,10 +133,10 @@ class HomePage extends Component {
                 analytics={true}
                 searchStateHeader>
                 <div>
-                        <h1>Hi {user.firstName}!</h1>
-                        <p>
-                        <Link to="/login">Logout</Link>
-                        </p>
+                    <h1>Hi {user.firstName}!</h1>
+                    <p>
+                    <Link to="/login">Logout</Link>
+                    </p>
                 </div>
                 <Row gutter={16} style={{ padding: 20 }}>
                         <Col span={12}>
