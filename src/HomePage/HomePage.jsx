@@ -23,7 +23,7 @@ import {
 // import 'antd/dist/antd.css';
 
 function fetchUsers(token) {
-  return fetch('http://localhost:3000/verify', {
+  return fetch('https://aws-vault-dev.octon.org.uk/auth/verify', {
       method: "POST",
       crossDomain:true,
       headers:{'Content-Type': 'application/json'},
@@ -41,7 +41,7 @@ function fetchUsers(token) {
 }
 
 function fetchURL(url) {
-    return fetch('http://192.168.15.57:5000/files?pathToFile='+url, {
+    return fetch('https://aws-vault-dev.octon.org.uk/files/files?pathToFile='+url, {
       method: "GET"
     })
     .then((resp) => {

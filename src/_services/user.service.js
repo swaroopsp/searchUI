@@ -7,7 +7,7 @@ export const userService = {
 };
 
 function login(username, password) {
-    return fetch('http://localhost:3000/loginOAuth',
+    return fetch('https://aws-vault-dev.octon.org.uk/auth/loginOAuth',
     {
         method: 'post',
         crossDomain:true,
