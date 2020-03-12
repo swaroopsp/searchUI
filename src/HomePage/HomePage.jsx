@@ -30,7 +30,6 @@ function fetchUsers(token) {
       body: JSON.stringify({ token })
   })
   .then((resp) => {
-      console.log(resp.status)
       if(resp.status != 200){
         throw error;
       }
@@ -42,7 +41,6 @@ function fetchUsers(token) {
 }
 
 function fetchURL(url) {
-    console.log("asdfsdfsd" + url)
     return fetch('http://192.168.15.57:5000/files?pathToFile='+url, {
       method: "GET"
     })
@@ -50,11 +48,10 @@ function fetchURL(url) {
       return resp.text();
     }) 
     .then((data) => {
-        console.log("11111111111111" + data)   
         return data;              
     })
     .catch((error) => {
-      console.log(error, "catch the hoop")
+      console.log(error, "Error connecting to Elastic search or STS api")
     })
   }
 
@@ -205,6 +202,13 @@ class HomePage extends Component {
                                       'list-2'
                                     ]
                                   }}
+                                  onQueryChange={
+                                    function(prevQuery, nextQuery) {
+                                      if ('match_all' in nextQuery['query']) {
+                                        nextQuery['query'] = { match_none: {} }
+                                      }
+                                    }
+                                  }
                                   renderItem={renderItem}
                                   size={10}
                                   style={{

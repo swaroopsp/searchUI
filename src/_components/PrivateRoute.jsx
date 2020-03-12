@@ -12,7 +12,7 @@ function isTokenValid(token) {
      return resp.status == 200? true : false;
   })
   .catch((error) => {
-    console.log(error, "catch the hoop")
+    console.log(error, "Error while connecting to API")
     return false;
   })
 }
