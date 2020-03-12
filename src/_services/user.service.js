@@ -7,8 +7,7 @@ export const userService = {
 };
 
 function login(username, password) {
-
-    return fetch('http://localhost:3000/fakeToken',
+    return fetch('http://localhost:3000/loginOAuth',
     {
         method: 'post',
         crossDomain:true,
