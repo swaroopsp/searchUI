@@ -1,10 +1,10 @@
 {
   "dependencies": {
-    "@appbaseio/reactivesearch": "3.2.4",
+    "@appbaseio/reactivesearch": "3.10.0",
     "antd": "3.26.7",
     "react": "16.12.0",
     "react-dom": "16.12.0",
-    "react-router-dom": "^4.1.2",
+    "react-router-dom": "^6.4.0",
     "react-expand-collapse": "0.2.0"
   },
   "name": "fca-search-app",
